@@ -1,0 +1,2 @@
+# Dependencies are added here as each roadmap step needs them —
+# not all up front. See CLAUDE.md for the current build step.
