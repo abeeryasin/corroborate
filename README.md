@@ -24,3 +24,5 @@ pip install -r requirements.txt
 - [`CLAUDE.md`](CLAUDE.md) — project overview, conventions, current roadmap position
 - [`docs/decisions.md`](docs/decisions.md) — dated log of real decisions and the reasoning behind them
 - [`docs/course-alignment.md`](docs/course-alignment.md) — how this build maps to an external learning curriculum
+- [`docs/project-structure.md`](docs/project-structure.md) — what each folder contains and why
+- [`docs/timeline.md`](docs/timeline.md) — hour estimates per roadmap step
