@@ -17,3 +17,15 @@ Papers need to be separable by who uploaded them (e.g. a friend uploading dengue
 ## 2026-07-21 — Requirements added incrementally, not front-loaded
 
 `requirements.txt` starts empty. Each dependency gets added at the roadmap step that actually needs it, so its purpose is clear when it's added rather than installing a wall of unused packages on day one.
+
+## 2026-07-23 — Papers schema fields, informed by real bibliographic standards
+
+Researched what real reference managers (Zotero, Mendeley) and metadata standards (Dublin Core, DataCite, CrossRef) actually capture for a paper. Added `journal`, `doi`, and `abstract` beyond the original title/authors/year — `abstract` specifically because it lets the UI show a quick summary without running full RAG retrieval, and `journal`/`doi` because they're what makes a citation look real. Deliberately left out `volume`/`issue`/`pages` (matter for perfect citation formatting, not for retrieval quality) and `keywords` (our retrieval is semantic/embedding-based, not keyword-based, so a keywords column is less load-bearing here than in a traditional reference manager). Schemas are cheap to extend later — this isn't a permanent decision, just the right scope for now.
+
+## 2026-07-23 — `id` (surrogate key) and `doi` (natural key) are both needed
+
+They look redundant but serve different jobs. `id` is internal, always present (auto-assigned on insert), used for relationships between tables later. `doi` is an external, real-world identifier — not guaranteed to exist (many papers don't have one), not something we control, but useful later for detecting duplicate uploads and linking to the original source. Standard database pattern: prefer a surrogate key as the actual primary key even when a natural key exists, because natural keys can be missing or fragile to match on.
+
+## 2026-07-23 — Parameterized queries (`?` placeholders), never string-built SQL
+
+All queries in `app/db/queries.py` pass values as a separate tuple to `.execute()`, never by pasting values directly into the SQL text (e.g. an f-string). Directly pasting user-controlled text into SQL is how SQL injection attacks happen — a paper title containing something like `'; DROP TABLE papers; --` could otherwise be interpreted as a second command instead of a piece of data. Placeholders guarantee values are always treated as data, never as part of the command structure, regardless of their contents.

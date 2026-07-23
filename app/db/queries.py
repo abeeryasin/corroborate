@@ -1,0 +1,46 @@
+"""Functions for inserting and retrieving papers from the database."""
+
+import sqlite3
+
+DB_PATH = "data/papers.db"
+
+
+def insert_paper(title, authors, year, journal, doi, abstract, workspace, filename, uploaded_at):
+    connection = sqlite3.connect(DB_PATH)
+    connection.execute(
+        """
+        INSERT INTO papers (title, authors, year, journal, doi, abstract, workspace, filename, uploaded_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """,
+        (title, authors, year, journal, doi, abstract, workspace, filename, uploaded_at),
+    )
+    connection.commit()
+    connection.close()
+
+
+def get_papers_by_workspace(workspace):
+    connection = sqlite3.connect(DB_PATH)
+    cursor = connection.execute(
+        "SELECT * FROM papers WHERE workspace = ?",
+        (workspace,),
+    )
+    papers = cursor.fetchall()
+    connection.close()
+    return papers
+
+
+if __name__ == "__main__":
+    insert_paper(
+        title="Climate Drivers of Dengue Transmission in Pakistan",
+        authors="A. Khan, S. Ahmed",
+        year=2022,
+        journal="Journal of Tropical Medicine",
+        doi=None,
+        abstract="A study of temperature and rainfall effects on dengue incidence.",
+        workspace="abeer-test",
+        filename="khan_dengue_2022.pdf",
+        uploaded_at="2026-07-23T10:00:00",
+    )
+
+    papers = get_papers_by_workspace("abeer-test")
+    print(papers)
