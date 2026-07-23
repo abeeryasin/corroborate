@@ -29,3 +29,9 @@ They look redundant but serve different jobs. `id` is internal, always present (
 ## 2026-07-23 — Parameterized queries (`?` placeholders), never string-built SQL
 
 All queries in `app/db/queries.py` pass values as a separate tuple to `.execute()`, never by pasting values directly into the SQL text (e.g. an f-string). Directly pasting user-controlled text into SQL is how SQL injection attacks happen — a paper title containing something like `'; DROP TABLE papers; --` could otherwise be interpreted as a second command instead of a piece of data. Placeholders guarantee values are always treated as data, never as part of the command structure, regardless of their contents.
+
+## 2026-07-24 — `pypdf` for PDF text extraction, chosen over `pdfplumber`
+
+`pypdf` is lightweight and does exactly what we need — extract raw text. `pdfplumber` is more powerful (handles complex layouts and tables precisely) but heavier, and we don't need that level of power for the MVP. Tested against a real academic paper (dengue/climate paper, ~80K characters) — extraction was clean, no garbled text.
+
+**Known limitation, accepted for now:** `pypdf` only extracts text that's actually embedded as selectable text in the PDF. A scanned paper (a photograph of a page, not real typed text) would extract to empty or near-empty output — `pypdf` can't do OCR (recognizing text from an image). Out of scope for the MVP; would need a different tool (e.g. `pytesseract`) if this becomes a real problem with actual uploaded papers.
