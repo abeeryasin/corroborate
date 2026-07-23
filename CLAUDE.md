@@ -32,10 +32,10 @@ pip install -r requirements.txt
 
 Roadmap — build one step at a time:
 
-1. Scaffold ← current
+1. Scaffold
 2. Metadata DB (SQLite)
 3. PDF ingestion
-4. Chunking + embeddings
+4. Chunking + embeddings ← current
 5. Streamlit v1
 6. RAG Q&A (the centerpiece)
 7. Polish
