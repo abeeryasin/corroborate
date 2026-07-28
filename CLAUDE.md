@@ -27,6 +27,7 @@ pip install -r requirements.txt
 - Dependencies go into `requirements.txt` only when a step actually needs them, not front-loaded.
 - Secrets live in `.env` (gitignored); `.env.example` holds placeholder keys only.
 - Papers are scoped by a `workspace` column (not full user auth) — see docs/course-alignment.md.
+- When a concept being taught maps to a specific SLO in docs/course-alignment.md, name the SLO number and description explicitly, in the moment — don't just track it silently after the fact. The user genuinely wants to know what course material they've learned and where, not just have it checked off in a document they don't see.
 
 ## Current Status
 
