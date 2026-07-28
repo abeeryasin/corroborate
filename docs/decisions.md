@@ -35,3 +35,17 @@ All queries in `app/db/queries.py` pass values as a separate tuple to `.execute(
 `pypdf` is lightweight and does exactly what we need — extract raw text. `pdfplumber` is more powerful (handles complex layouts and tables precisely) but heavier, and we don't need that level of power for the MVP. Tested against a real academic paper (dengue/climate paper, ~80K characters) — extraction was clean, no garbled text.
 
 **Known limitation, accepted for now:** `pypdf` only extracts text that's actually embedded as selectable text in the PDF. A scanned paper (a photograph of a page, not real typed text) would extract to empty or near-empty output — `pypdf` can't do OCR (recognizing text from an image). Out of scope for the MVP; would need a different tool (e.g. `pytesseract`) if this becomes a real problem with actual uploaded papers.
+
+## 2026-07-28 — Run project files with `-m`, not as a bare script path, once they import our own code
+
+`python app/rag/chunking.py` failed with `ModuleNotFoundError: No module named 'app'` the first time a file tried to import our own project code (`from app.ingestion.pdf_extractor import extract_text`). Running a file directly as a script makes Python search for imports starting from *that file's own folder*, not the project root — so it couldn't find `app/` at all. Fix: run it as a module instead, `python -m app.rag.chunking` (dot notation, no `.py`), which searches starting from the current working directory (the project root) instead. Files that only import third-party/stdlib packages (`schema.py`, `queries.py`, `pdf_extractor.py`) never hit this, since those are always found regardless of the search starting point — this only shows up once a file imports *our own* project structure.
+
+## 2026-07-29 — First real RAG retrieval test: works, with a known weakness
+
+Tested `search()` end-to-end against the real dengue paper with the query "mosquito breeding and rainfall" — deliberately not using the paper's own wording, to test genuine semantic matching rather than keyword overlap. Top result was excellent (found a passage about environmental/climate factors driving dengue, with zero exact word overlap with the query). Results 2-4 were topically relevant but looser matches. Result 5 was a chunk of the paper's *references list*, pulled in because citation entries are dense with topic words ("climate change", "dengue") without being real content.
+
+**Known limitation, consistent with the earlier no-overlap decision:** naive fixed-size chunking has no awareness of document structure, so it can't distinguish real content from a references section. Candidate future fixes: strip reference sections before chunking, or accept this as a real example of RAG's limits for the course's required rag-evaluation.md artifact (SLO 4.22 explicitly wants both successful and failing example queries documented — this is a real failing case, not a hypothetical one).
+
+## 2026-07-24 — Fixed-size chunking, no overlap (for now)
+
+`chunk_text()` splits paper text into equal-sized pieces with no overlap between them. A more refined technique gives neighboring chunks a bit of shared overlap, so a sentence that would otherwise get cut in half at a chunk boundary still appears in full somewhere. Deliberately skipped for now to keep Step 4 (already the densest step on the roadmap) from getting even more complex on the first pass. Revisit if retrieval quality later seems to miss things right at chunk boundaries — this file isn't committed yet, still mid-Step-4.

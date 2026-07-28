@@ -2,3 +2,5 @@
 # not all up front. See CLAUDE.md for the current build step.
 
 pypdf  # Step 3: extract text from uploaded PDFs
+sentence-transformers  # Step 4: turn text chunks into embeddings (vectors)
+chromadb  # Step 4: store embeddings and search by similarity
