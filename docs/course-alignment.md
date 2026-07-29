@@ -60,7 +60,7 @@ Tracks how the Evidence Intelligence Platform build satisfies the AI-native engi
 |---|---|---|---|---|
 | 4.1 | External Integration | What MCP is | `mcp-explainer.md` | Not started — optional per earlier agreement |
 | 4.2 | External Integration | Secure DB credentials | `.env` + `.env.example` | Not started — no credentials yet, Step 6 |
-| 4.5 | External Integration | DB vocabulary | `db-vocabulary.md` | In progress — scaffold created (10 terms), user filling in own-words definitions after a 6-question active-recall review confirmed solid conceptual grasp with some vocabulary imprecision (relational vs. flat data terminology, primary/surrogate/natural key distinction) |
+| 4.5 | External Integration | DB vocabulary | `db-vocabulary.md` | **Satisfied** — 12 terms defined in the user's own words, fact-checked against the real schema, committed |
 | 4.3 | External Integration | MCP → DB connection | `mcp-setup.md` | Not started — optional |
 | 4.4 | External Integration | READ-ONLY access | Permission proof | Not started |
 | 4.6 | External Integration | Schema-first habit | `schema-first-checklist.md` | Not started — corrected 2026-07-28, not yet genuinely practiced |
@@ -76,8 +76,8 @@ Tracks how the Evidence Intelligence Platform build satisfies the AI-native engi
 | SLO | Domain | What it's testing | Required artifact | Status |
 |---|---|---|---|---|
 | 1.9–1.17, 1.20 | Mental Models | Advanced reflective practices (tab tax, friction maxxing, map vs. territory, ELI5 audit, scout mindset, stakes, biomimetic patterns, identity shift) | Various journals/docs | Not started |
-| 4.7 | External Integration | Critically evaluate agent's DB decisions | `db-review-log.md` | Partial — the workspace-column pushback is a real logged case; dedicated file not made |
-| 4.8 | External Integration | Relational vs. flat data | `data-modeling.md` | In progress — scaffold created, user filling in own-words content — **corrected: this is Phase 5, not Phase 4** |
+| 4.7 | External Integration | Critically evaluate agent's DB decisions | `db-review-log.md` | Partial, strong evidence base — real logged cases: the workspace-column pushback (Step 2), catching an invented `topic` column in db-vocabulary.md, catching a relational-pattern mismatch in data-modeling.md, catching the SLO 4.6 mismarking itself. Dedicated file still not made — would be quick to write given how much material already exists |
+| 4.8 | External Integration | Relational vs. flat data | `data-modeling.md` | **Satisfied** — written by the user, committed — **corrected: this is Phase 5, not Phase 4** |
 | 4.10 | External Integration | Iterate on analysis | `analysis-iterations.md` | Not started |
 | 4.11 | External Integration | Reusable analysis skill | Skill file | Not started |
 | 5.22 | Autonomous Operations | Worktrees for parallel tasks | Demo | Not started |
@@ -94,7 +94,7 @@ Tracks how the Evidence Intelligence Platform build satisfies the AI-native engi
 | 3.18 | Memory Engineering | Start-stop session hooks | Shell scripts / CLAUDE.md rules | Not started |
 | 4.12 | External Integration | Emergent vs. traditional schema | `schema-philosophy.md` | Not started |
 | 4.14 | External Integration | When KG vs. flat files vs. RAG | `data-structure-decision.md` | Not started — relevant once we've built RAG for real |
-| 4.22 | External Integration | **RAG for document Q&A** | `rag-evaluation.md`, 10+ docs, 5 working + 3 failing queries documented | **In progress** — PDF extraction done (Step 3), chunking built (Step 4), embeddings/Chroma next, then Step 6 Q&A. This is the centerpiece SLO of the whole project. |
+| 4.22 | External Integration | **RAG for document Q&A** | `rag-evaluation.md`, 10+ docs, 5 working + 3 failing queries documented | **In progress** — extraction, chunking, embeddings, and Chroma storage/search all built and tested end-to-end against a real paper (found a strong semantic match with zero keyword overlap; also surfaced a real failing case — a references-list chunk ranked in the top 5, logged in decisions.md). Claude-generated answers (Step 6) still pending. `rag-evaluation.md` not yet written but the review data already exists in decisions.md. This is the centerpiece SLO of the whole project. |
 | 5.1 | Autonomous Operations | Autonomy spectrum | `autonomy-map.md` | Not started |
 | 5.2 | Autonomous Operations | Guardrail design | `guardrails.md` | Not started |
 | 5.4 | Autonomous Operations | Safety risk identification | `risk-assessment.md` | Not started |
