@@ -60,7 +60,7 @@ Tracks how the Evidence Intelligence Platform build satisfies the AI-native engi
 |---|---|---|---|---|
 | 4.1 | External Integration | What MCP is | `mcp-explainer.md` | Not started — optional per earlier agreement |
 | 4.2 | External Integration | Secure DB credentials | `.env` + `.env.example` | Not started — no credentials yet, Step 6 |
-| 4.5 | External Integration | DB vocabulary | `db-vocabulary.md` | Partial — terms covered live, no dedicated file yet (catch-up planned) |
+| 4.5 | External Integration | DB vocabulary | `db-vocabulary.md` | In progress — scaffold created (10 terms), user filling in own-words definitions after a 6-question active-recall review confirmed solid conceptual grasp with some vocabulary imprecision (relational vs. flat data terminology, primary/surrogate/natural key distinction) |
 | 4.3 | External Integration | MCP → DB connection | `mcp-setup.md` | Not started — optional |
 | 4.4 | External Integration | READ-ONLY access | Permission proof | Not started |
 | 4.6 | External Integration | Schema-first habit | `schema-first-checklist.md` | Not started — corrected 2026-07-28, not yet genuinely practiced |
@@ -77,7 +77,7 @@ Tracks how the Evidence Intelligence Platform build satisfies the AI-native engi
 |---|---|---|---|---|
 | 1.9–1.17, 1.20 | Mental Models | Advanced reflective practices (tab tax, friction maxxing, map vs. territory, ELI5 audit, scout mindset, stakes, biomimetic patterns, identity shift) | Various journals/docs | Not started |
 | 4.7 | External Integration | Critically evaluate agent's DB decisions | `db-review-log.md` | Partial — the workspace-column pushback is a real logged case; dedicated file not made |
-| 4.8 | External Integration | Relational vs. flat data | `data-modeling.md` | Partial — concept genuinely covered (workspace column); dedicated file not made — **corrected: this is Phase 5, not Phase 4** |
+| 4.8 | External Integration | Relational vs. flat data | `data-modeling.md` | In progress — scaffold created, user filling in own-words content — **corrected: this is Phase 5, not Phase 4** |
 | 4.10 | External Integration | Iterate on analysis | `analysis-iterations.md` | Not started |
 | 4.11 | External Integration | Reusable analysis skill | Skill file | Not started |
 | 5.22 | Autonomous Operations | Worktrees for parallel tasks | Demo | Not started |

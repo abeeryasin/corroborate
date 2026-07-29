@@ -36,8 +36,8 @@ Roadmap — build one step at a time:
 1. Scaffold
 2. Metadata DB (SQLite)
 3. PDF ingestion
-4. Chunking + embeddings ← current
-5. Streamlit v1
+4. Chunking + embeddings
+5. Streamlit v1 ← current
 6. RAG Q&A (the centerpiece)
 7. Polish
 8. Deploy
