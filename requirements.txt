@@ -4,3 +4,6 @@
 pypdf  # Step 3: extract text from uploaded PDFs
 sentence-transformers  # Step 4: turn text chunks into embeddings (vectors)
 chromadb  # Step 4: store embeddings and search by similarity
+streamlit  # Step 5: web UI
+anthropic  # Step 6: call Claude to generate answers
+python-dotenv  # Step 6: load the API key from .env

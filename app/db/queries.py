@@ -7,7 +7,7 @@ DB_PATH = "data/papers.db"
 
 def insert_paper(title, authors, year, journal, doi, abstract, workspace, filename, uploaded_at):
     connection = sqlite3.connect(DB_PATH)
-    connection.execute(
+    cursor = connection.execute(
         """
         INSERT INTO papers (title, authors, year, journal, doi, abstract, workspace, filename, uploaded_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -15,11 +15,14 @@ def insert_paper(title, authors, year, journal, doi, abstract, workspace, filena
         (title, authors, year, journal, doi, abstract, workspace, filename, uploaded_at),
     )
     connection.commit()
+    paper_id = cursor.lastrowid
     connection.close()
+    return paper_id
 
 
 def get_papers_by_workspace(workspace):
     connection = sqlite3.connect(DB_PATH)
+    connection.row_factory = sqlite3.Row
     cursor = connection.execute(
         "SELECT * FROM papers WHERE workspace = ?",
         (workspace,),
@@ -27,6 +30,18 @@ def get_papers_by_workspace(workspace):
     papers = cursor.fetchall()
     connection.close()
     return papers
+
+
+def get_paper_by_id(paper_id):
+    connection = sqlite3.connect(DB_PATH)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.execute(
+        "SELECT * FROM papers WHERE id = ?",
+        (paper_id,),
+    )
+    paper = cursor.fetchone()
+    connection.close()
+    return paper
 
 
 if __name__ == "__main__":
@@ -43,4 +58,4 @@ if __name__ == "__main__":
     )
 
     papers = get_papers_by_workspace("abeer-test")
-    print(papers)
+    print([dict(paper) for paper in papers])

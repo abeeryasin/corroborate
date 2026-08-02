@@ -10,32 +10,36 @@ Tracks how the Evidence Intelligence Platform build satisfies the AI-native engi
 
 ---
 
+**Phases 1–3 were already completed in a prior project, before this repo existed (confirmed 2026-08-03; this was actually first decided back on 2026-07-20, but the rows below never got updated to reflect it — corrected now).** No dedicated artifacts for those phases are planned in *this* repo. Going forward, `CLAUDE.md` carries a standing rule to proactively call out, in the moment, whenever current work genuinely applies a Phase 1–3 concept (closing the loop, context window awareness, producer vs. consumer mindset, this project's own memory architecture, etc.) — ongoing awareness instead of a checklist.
+
+---
+
 ## Phase 1: First Contact (Week 1)
 
 | SLO | Domain | What it's testing | Required artifact | Status |
 |---|---|---|---|---|
-| 1.1 | Mental Models | Context window limits | `CLAUDE.md` "Context Window" section, 2+ examples | **Satisfied** — done, in this project's own CLAUDE.md |
-| 1.2 | Mental Models | Goldfish analogy | `docs/onboarding/` video or 1-pager | Not started (concept from prior project; this artifact not in this repo) |
-| 1.3 | Mental Models | Agent loop diagram | `agent-loop-diagram.md` | Not started |
-| 1.4 | Mental Models | Chat vs. agent systems | `comparison-table.md` | Not started |
-| 2.1 | Agent Fundamentals | Editor + Claude Code setup | `setup-verification.md` | Not started |
+| 1.1 | Mental Models | Context window limits | `CLAUDE.md` "Context Window" section, 2+ examples | **Satisfied** — done in prior project, and independently done again here, in this project's own CLAUDE.md |
+| 1.2 | Mental Models | Goldfish analogy | `docs/onboarding/` video or 1-pager | **Satisfied in prior project** — same underlying concept as 1.1 (context window limits), different explanatory device; no separate artifact in this repo |
+| 1.3 | Mental Models | Agent loop diagram | `agent-loop-diagram.md` | **Satisfied in prior project** |
+| 1.4 | Mental Models | Chat vs. agent systems | `comparison-table.md` | **Satisfied in prior project** |
+| 2.1 | Agent Fundamentals | Editor + Claude Code setup | `setup-verification.md` | **Satisfied in prior project** |
 | 2.2 | Agent Fundamentals | Project folder structure | README explaining folders | **Satisfied** — `docs/project-structure.md` |
-| 2.3 | Agent Fundamentals | Verify Claude Code works | `examples/first-task/` | Not started |
-| 2.4 | Agent Fundamentals | Voice typing | Demo | Not started / optional |
-| 2.9 | Agent Fundamentals | File formats guide | `file-formats-guide.md` | Not started (touched conceptually, no dedicated file) |
+| 2.3 | Agent Fundamentals | Verify Claude Code works | `examples/first-task/` | **Satisfied in prior project** — and continuously re-demonstrated by every session in this repo |
+| 2.4 | Agent Fundamentals | Voice typing | Demo | Not started / optional — no confirmation this was done in the prior project either |
+| 2.9 | Agent Fundamentals | File formats guide | `file-formats-guide.md` | **Satisfied in prior project** |
 
 ## Phase 2: The Mindset Shift (Week 2)
 
 | SLO | Domain | What it's testing | Required artifact | Status |
 |---|---|---|---|---|
-| 1.5 | Mental Models | Producer vs. consumer mindset | `producer-mindset.md` | Not started |
-| 1.6 | Mental Models | Fire-fighting vs. system-building | `time-audit.md` | Not started |
-| 1.7 | Mental Models | 90/10 planning rule | plan.md before each implementation, ×3 | Not started |
-| 1.8 | Mental Models | Patience through iteration | `iterations-log.md` | Not started |
-| 2.5 | Agent Fundamentals | Detailed prompts | `prompt-comparison.md` | Not started |
-| 2.6 | Agent Fundamentals | Feedback for refinement | `iteration-log.md` | Not started |
-| 2.7 | Agent Fundamentals | Context window awareness | `session-management.md` | Not started |
-| 2.10 | Agent Fundamentals | Zero/few-shot/CoT prompting | `technique-comparison.md` | Not started |
+| 1.5 | Mental Models | Producer vs. consumer mindset | `producer-mindset.md` | **Satisfied in prior project** |
+| 1.6 | Mental Models | Fire-fighting vs. system-building | `time-audit.md` | **Satisfied in prior project** |
+| 1.7 | Mental Models | 90/10 planning rule | plan.md before each implementation, ×3 | **Satisfied in prior project** |
+| 1.8 | Mental Models | Patience through iteration | `iterations-log.md` | **Satisfied in prior project** |
+| 2.5 | Agent Fundamentals | Detailed prompts | `prompt-comparison.md` | **Satisfied in prior project** |
+| 2.6 | Agent Fundamentals | Feedback for refinement | `iteration-log.md` | **Satisfied in prior project** |
+| 2.7 | Agent Fundamentals | Context window awareness | `session-management.md` | **Satisfied in prior project** |
+| 2.10 | Agent Fundamentals | Zero/few-shot/CoT prompting | `technique-comparison.md` | **Satisfied in prior project** |
 | 3.1 | Memory Engineering | Initial CLAUDE.md | CLAUDE.md w/ required sections | **Satisfied** |
 | 3.5 | Memory Engineering | decisions.md / learning log | 10+ dated entries | **Satisfied** — `docs/decisions.md` |
 
@@ -43,23 +47,23 @@ Tracks how the Evidence Intelligence Platform build satisfies the AI-native engi
 
 | SLO | Domain | What it's testing | Required artifact | Status |
 |---|---|---|---|---|
-| 3.3 | Memory Engineering | Update CLAUDE.md over time | git log, 5+ real updates | **Likely satisfied** — multiple real CLAUDE.md updates in git history |
-| 3.6 | Memory Engineering | skills/docs/context folders | `structure.md` | Partial — `docs/` well organized, no `skills/` yet |
-| 3.7 | Memory Engineering | "Close the loop" pattern | `loop-closures.md` | Partial — practiced informally throughout, no dedicated file |
-| 3.9 | Memory Engineering | Skill files | `.claude/skills/` | Not started |
-| 3.12 | Memory Engineering | Beads issue tracking | `.beads/` | Not started — using TodoWrite as a lighter substitute |
-| 3.14 | Memory Engineering | Weekly maintenance | 4-week maintenance log | Not started — project isn't 4 weeks old yet |
-| 3.16 | Memory Engineering | Memory continuum diagram | `memory-hierarchy.md` | Partial — taught live (dual-memory-system explanation), no diagram file |
-| 2.8 | Agent Fundamentals | Strategic fresh sessions | `context-strategy.md` | Not started |
-| 3.4 | Memory Engineering | CLAUDE.md under 100 lines | `refactoring-notes.md` | Not checked |
-| 3.8 | Memory Engineering | Lazy loading for memory | `memory-map.md` | Not started |
+| 3.3 | Memory Engineering | Update CLAUDE.md over time | git log, 5+ real updates | Genuinely in progress, verified via real `git log` (2026-08-03) — 4 commits touch `CLAUDE.md` so far, several more edits from this session not yet committed; will clear 5+ once committed |
+| 3.6 | Memory Engineering | skills/docs/context folders | `structure.md` | **Satisfied in prior project** — `docs/` in this repo is well organized; `.claude/skills/` doesn't exist here yet (confirmed 2026-08-03) |
+| 3.7 | Memory Engineering | "Close the loop" pattern | `loop-closures.md` | **Satisfied in prior project — and genuinely practiced in this repo too**, every entry in `docs/decisions.md` (13+ and counting) is a real loop closure; no dedicated `loop-closures.md` file yet |
+| 3.9 | Memory Engineering | Skill files | `.claude/skills/` | **Satisfied in prior project** — doesn't exist in this repo yet; real candidate identified 2026-08-03 (a launch/test skill, since that procedure's already been manually re-derived twice this project) |
+| 3.12 | Memory Engineering | Beads issue tracking | `.beads/` | Not started — using TodoWrite as a lighter substitute (this is a project-specific tooling choice, not something "already done" elsewhere) |
+| 3.14 | Memory Engineering | Weekly maintenance | 4-week maintenance log | Not started — project isn't 4 weeks old yet (timing-dependent on this project specifically) |
+| 3.16 | Memory Engineering | Memory continuum diagram | `memory-hierarchy.md` | **Satisfied in prior project — and genuinely practiced in this repo too**, real dual-memory-system (this repo's own docs vs. the assistant's persistent cross-session memory) discussed live 2026-08-03; no diagram file yet |
+| 2.8 | Agent Fundamentals | Strategic fresh sessions | `context-strategy.md` | **Satisfied in prior project** |
+| 3.4 | Memory Engineering | CLAUDE.md under 100 lines | `refactoring-notes.md` | **Satisfied** — verified 2026-08-03, `CLAUDE.md` is 48 lines, no refactoring needed |
+| 3.8 | Memory Engineering | Lazy loading for memory | `memory-map.md` | **Satisfied in prior project** |
 
 ## Phase 4: Connecting to the Real World (Week 4)
 
 | SLO | Domain | What it's testing | Required artifact | Status |
 |---|---|---|---|---|
 | 4.1 | External Integration | What MCP is | `mcp-explainer.md` | Not started — optional per earlier agreement |
-| 4.2 | External Integration | Secure DB credentials | `.env` + `.env.example` | Not started — no credentials yet, Step 6 |
+| 4.2 | External Integration | Secure DB credentials | `.env` + `.env.example` | **Satisfied, with a naming caveat** — `.env` (real key, gitignored) / `.env.example` (placeholder, committed) both exist and were verified working; the secret being protected is the Claude API key, not a literal DB credential, since SQLite has no login — same underlying skill (secrets never in code, real/placeholder file split), title doesn't quite fit this project's shape |
 | 4.5 | External Integration | DB vocabulary | `db-vocabulary.md` | **Satisfied** — 12 terms defined in the user's own words, fact-checked against the real schema, committed |
 | 4.3 | External Integration | MCP → DB connection | `mcp-setup.md` | Not started — optional |
 | 4.4 | External Integration | READ-ONLY access | Permission proof | Not started |
@@ -67,16 +71,16 @@ Tracks how the Evidence Intelligence Platform build satisfies the AI-native engi
 | 4.9 | External Integration | Data analysis + viz | Analysis script, 2+ charts | Not started |
 | 4.17 | External Integration | Why deployment | `deployment-rationale.md` | Not started — Step 8 |
 | 4.18 | External Integration | Cron jobs | `cron-candidates.md` | Deferred — optional, not required for MVP |
-| 4.19 | External Integration | Frontend vs. backend | `system-architecture.md` | Partial — explained conceptually, no diagram yet |
-| 4.20 | External Integration | What an API is | `api-test.md` | Not started — Step 6 |
-| 4.21 | External Integration | Env variables | `env-security.md` | Not started — Step 6 |
+| 4.19 | External Integration | Frontend vs. backend | `system-architecture.md` | **Satisfied** — `docs/system-architecture.md`, written by the user after a 5-question recall quiz, assistant fact-checked (caught one inaccuracy: described a "search tab" that doesn't exist in the actual UI, which is one continuous page, not `st.tabs`) |
+| 4.20 | External Integration | What an API is | `api-test.md` | **Satisfied** — `docs/api-test.md`, written by the user after a 4-question recall quiz, assistant fact-checked (caught one inaccuracy: described "code" as being shared between machines, corrected to "a message/data," not a program) |
+| 4.21 | External Integration | Env variables | `env-security.md` | **Satisfied** — `docs/env-security.md`, written by the user after a 3-question recall quiz, assistant fact-checked (sharpened one point: "the mistake was fixed" vs. "we confirmed via `git status` that nothing had leaked" are different claims) |
 
 ## Phase 5: Sharpening the Blade (Week 5)
 
 | SLO | Domain | What it's testing | Required artifact | Status |
 |---|---|---|---|---|
 | 1.9–1.17, 1.20 | Mental Models | Advanced reflective practices (tab tax, friction maxxing, map vs. territory, ELI5 audit, scout mindset, stakes, biomimetic patterns, identity shift) | Various journals/docs | Not started |
-| 4.7 | External Integration | Critically evaluate agent's DB decisions | `db-review-log.md` | Partial, strong evidence base — real logged cases: the workspace-column pushback (Step 2), catching an invented `topic` column in db-vocabulary.md, catching a relational-pattern mismatch in data-modeling.md, catching the SLO 4.6 mismarking itself. Dedicated file still not made — would be quick to write given how much material already exists |
+| 4.7 | External Integration | Critically evaluate agent's DB decisions | `db-review-log.md` | **Satisfied** — `docs/db-review-log.md`, 5 dated entries: the workspace-column pushback (Step 2), catching an invented `topic` column in db-vocabulary.md, catching a relational-pattern mismatch in data-modeling.md, catching the SLO 4.6 mismarking itself, and a live-questioned review of two Step 5 decisions (`lastrowid`, `sqlite3.Row`) |
 | 4.8 | External Integration | Relational vs. flat data | `data-modeling.md` | **Satisfied** — written by the user, committed — **corrected: this is Phase 5, not Phase 4** |
 | 4.10 | External Integration | Iterate on analysis | `analysis-iterations.md` | Not started |
 | 4.11 | External Integration | Reusable analysis skill | Skill file | Not started |
@@ -94,7 +98,7 @@ Tracks how the Evidence Intelligence Platform build satisfies the AI-native engi
 | 3.18 | Memory Engineering | Start-stop session hooks | Shell scripts / CLAUDE.md rules | Not started |
 | 4.12 | External Integration | Emergent vs. traditional schema | `schema-philosophy.md` | Not started |
 | 4.14 | External Integration | When KG vs. flat files vs. RAG | `data-structure-decision.md` | Not started — relevant once we've built RAG for real |
-| 4.22 | External Integration | **RAG for document Q&A** | `rag-evaluation.md`, 10+ docs, 5 working + 3 failing queries documented | **In progress** — extraction, chunking, embeddings, and Chroma storage/search all built and tested end-to-end against a real paper (found a strong semantic match with zero keyword overlap; also surfaced a real failing case — a references-list chunk ranked in the top 5, logged in decisions.md). Claude-generated answers (Step 6) still pending. `rag-evaluation.md` not yet written but the review data already exists in decisions.md. This is the centerpiece SLO of the whole project. |
+| 4.22 | External Integration | **RAG for document Q&A** | `rag-evaluation.md`, 10+ docs, 5 working + 3 failing queries documented | **Deferred, capability complete** — the full pipeline works end-to-end and is verified in the real browser UI: extract → chunk → embed → retrieve → cited, grounded Claude answer, including correctly saying "I don't know" instead of guessing (2026-08-01). The `rag-evaluation.md` artifact is explicitly deferred until the workspace has 10+ real uploaded papers (currently has 1, uploaded twice) — user's plan: go download ~10 real papers first, then run and document the full 10+ query eval (5 working, 3 failing) against a real multi-paper corpus, not a single-paper stand-in. **Reminder for a future session: come back to this once those papers are uploaded.** This is the centerpiece SLO of the whole project — only the dedicated evaluation artifact remains. |
 | 5.1 | Autonomous Operations | Autonomy spectrum | `autonomy-map.md` | Not started |
 | 5.2 | Autonomous Operations | Guardrail design | `guardrails.md` | Not started |
 | 5.4 | Autonomous Operations | Safety risk identification | `risk-assessment.md` | Not started |

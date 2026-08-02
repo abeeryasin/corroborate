@@ -19,7 +19,7 @@ def add_chunks(chunks, paper_id, workspace):
 
     metadatas = []
     for chunk in chunks:
-        metadatas.append({"workspace": workspace})
+        metadatas.append({"workspace": workspace, "paper_id": paper_id})
 
     collection.add(
         ids=ids,

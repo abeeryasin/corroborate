@@ -18,6 +18,7 @@ Claude (and Claude Code) only holds a limited amount of text in memory per sessi
 ```
 source .venv/bin/activate
 pip install -r requirements.txt
+streamlit run frontend/streamlit_app.py
 ```
 
 ## Preferences
@@ -28,6 +29,7 @@ pip install -r requirements.txt
 - Secrets live in `.env` (gitignored); `.env.example` holds placeholder keys only.
 - Papers are scoped by a `workspace` column (not full user auth) — see docs/course-alignment.md.
 - When a concept being taught maps to a specific SLO in docs/course-alignment.md, name the SLO number and description explicitly, in the moment — don't just track it silently after the fact. The user genuinely wants to know what course material they've learned and where, not just have it checked off in a document they don't see.
+- Phases 1–3 of the course (mental models, mindset shift, memory architecture) were already completed in a prior project, before this repo existed — no dedicated artifacts needed for those phases here. Instead, proactively call it out in the moment whenever current work is genuinely applying a Phase 1–3 concept (closing the loop, context window awareness, producer vs. consumer mindset, the project's own memory architecture, etc.) — even without a file to point to, so the user stays aware they're still practicing it, not just that it was checked off once elsewhere.
 
 ## Current Status
 
@@ -37,9 +39,9 @@ Roadmap — build one step at a time:
 2. Metadata DB (SQLite)
 3. PDF ingestion
 4. Chunking + embeddings
-5. Streamlit v1 ← current
+5. Streamlit v1
 6. RAG Q&A (the centerpiece)
-7. Polish
+7. Polish ← current
 8. Deploy
 9. Light eval
 
