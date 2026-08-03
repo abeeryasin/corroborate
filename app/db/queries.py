@@ -44,6 +44,27 @@ def get_paper_by_id(paper_id):
     return paper
 
 
+def delete_paper(paper_id):
+    connection = sqlite3.connect(DB_PATH)
+    connection.execute("DELETE FROM papers WHERE id = ?", (paper_id,))
+    connection.commit()
+    connection.close()
+
+
+def update_paper(paper_id, title, authors, year, journal, doi, abstract):
+    connection = sqlite3.connect(DB_PATH)
+    connection.execute(
+        """
+        UPDATE papers
+        SET title = ?, authors = ?, year = ?, journal = ?, doi = ?, abstract = ?
+        WHERE id = ?
+        """,
+        (title, authors, year, journal, doi, abstract, paper_id),
+    )
+    connection.commit()
+    connection.close()
+
+
 if __name__ == "__main__":
     insert_paper(
         title="Climate Drivers of Dengue Transmission in Pakistan",

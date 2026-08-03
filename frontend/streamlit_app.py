@@ -21,6 +21,7 @@ import streamlit as st
 from app.db.schema import init_db
 from app.db.queries import insert_paper, get_papers_by_workspace
 from app.ingestion.pdf_extractor import extract_text
+from app.ingestion.metadata_extractor import extract_metadata
 from app.rag.chunking import chunk_text
 from app.rag.vector_store import add_chunks
 from app.rag.generation import generate_answer
@@ -32,26 +33,46 @@ st.title("Evidence Intelligence Platform")
 workspace = st.text_input("Workspace", value="abeer-test")
 
 st.header("Upload a paper")
+
+uploaded_file = st.file_uploader("PDF file", type="pdf")
+
+extracted = {"title": "", "authors": "", "year": "", "journal": "", "doi": "", "abstract": ""}
+raw_text = ""
+
+if uploaded_file is not None:
+    if st.session_state.get("last_uploaded_name") != uploaded_file.name:
+        os.makedirs("data/uploads", exist_ok=True)
+        save_path = f"data/uploads/{uploaded_file.name}"
+        with open(save_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
+
+        with st.spinner("Reading the PDF and detecting title/authors/year..."):
+            raw_text = extract_text(save_path)
+            extracted = extract_metadata(raw_text)
+
+        st.session_state["last_uploaded_name"] = uploaded_file.name
+        st.session_state["last_uploaded_text"] = raw_text
+        st.session_state["extracted_metadata"] = extracted
+    else:
+        raw_text = st.session_state.get("last_uploaded_text", "")
+        extracted = st.session_state.get("extracted_metadata", extracted)
+
+    st.caption("Fields below were auto-detected from the PDF — review and fix anything wrong before uploading.")
+
 with st.form("upload_form", clear_on_submit=True):
-    uploaded_file = st.file_uploader("PDF file", type="pdf")
-    title = st.text_input("Title")
-    authors = st.text_input("Authors")
-    year_input = st.text_input("Year")
-    journal = st.text_input("Journal")
-    doi = st.text_input("DOI")
-    abstract = st.text_area("Abstract")
+    title = st.text_input("Title", value=extracted["title"])
+    authors = st.text_input("Authors", value=extracted["authors"])
+    year_input = st.text_input("Year", value=extracted["year"])
+    journal = st.text_input("Journal", value=extracted["journal"])
+    doi = st.text_input("DOI", value=extracted["doi"])
+    abstract = st.text_area("Abstract", value=extracted["abstract"])
     submitted = st.form_submit_button("Upload")
 
 if submitted:
     if not uploaded_file or not title or not workspace:
         st.error("Workspace, title, and a PDF file are all required.")
     else:
-        os.makedirs("data/uploads", exist_ok=True)
-        save_path = f"data/uploads/{uploaded_file.name}"
-        with open(save_path, "wb") as f:
-            f.write(uploaded_file.getbuffer())
-
-        text = extract_text(save_path)
+        text = raw_text or extract_text(f"data/uploads/{uploaded_file.name}")
         chunks = chunk_text(text)
 
         paper_id = insert_paper(

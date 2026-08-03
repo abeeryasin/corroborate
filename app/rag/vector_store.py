@@ -29,6 +29,10 @@ def add_chunks(chunks, paper_id, workspace):
     )
 
 
+def delete_paper_chunks(paper_id):
+    collection.delete(where={"paper_id": paper_id})
+
+
 def search(query, workspace, n_results=5):
     query_embedding = model.encode(query).tolist()
     results = collection.query(
