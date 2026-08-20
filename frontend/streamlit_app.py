@@ -125,9 +125,24 @@ if workspace:
 
 st.header("Ask a question")
 query = st.text_input("Question")
-if query:
+
+if query and query != st.session_state.get("last_answered_question"):
     with st.spinner("Reading your papers..."):
         answer, sources = generate_answer(query, workspace=workspace)
     st.write(answer)
     if sources:
         st.caption("Sources: " + "; ".join(sources))
+
+    st.session_state.setdefault("qa_history", []).append(
+        {"question": query, "answer": answer, "sources": sources}
+    )
+    st.session_state["last_answered_question"] = query
+
+if st.session_state.get("qa_history"):
+    st.header("Previously asked questions")
+    for qa in reversed(st.session_state["qa_history"]):
+        st.write(f"**Q: {qa['question']}**")
+        st.write(qa["answer"])
+        if qa["sources"]:
+            st.caption("Sources: " + "; ".join(qa["sources"]))
+        st.divider()
