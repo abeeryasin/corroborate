@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-Evidence Intelligence Platform — upload research papers, ask questions, get cited answers drawn from your own uploaded PDFs (retrieval-augmented generation). Portfolio + learning project — MVP scope only. See `docs/course-alignment.md` for how this maps to an external learning curriculum.
+Corroborate — upload research papers, ask questions, get cited answers drawn from your own uploaded PDFs (retrieval-augmented generation). Portfolio + learning project — MVP scope only. See `docs/course-alignment.md` for how this maps to an external learning curriculum.
 
-Stack: Python 3.12 + FastAPI backend, SQLite for metadata (raw SQL, no ORM), Chroma for vectors, sentence-transformers for local embeddings, Claude API (`claude-opus-4-8` default) for generation, Streamlit frontend.
+Stack: Python 3.12, SQLite for metadata (raw SQL, no ORM), Chroma for vectors, sentence-transformers for local embeddings, Claude API (`claude-opus-4-8` default) for generation, Streamlit frontend — Streamlit calls everything directly, in-process; no separate backend service exists (a FastAPI layer was scaffolded in Step 1, never built, and removed 2026-08-20 since nothing needs that boundary yet — see docs/system-architecture.md).
 
 ## Context Window
 

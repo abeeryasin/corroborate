@@ -2,7 +2,7 @@
 
 **This project exists to be the vehicle for learning the course — it is not primarily a CV/portfolio piece.** When project progress and genuine course understanding are ever in tension, course understanding wins.
 
-Tracks how the Evidence Intelligence Platform build satisfies the AI-native engineer curriculum written by the author's brother. He's reviewing informally, not officially grading; he's confirmed genuinely team/organization-dependent SLOs don't apply to a solo learner. Everything else — even material outside this app's direct feature set — is meant to be genuinely understood, not skipped for convenience.
+Tracks how the Corroborate build satisfies the AI-native engineer curriculum written by the author's brother. He's reviewing informally, not officially grading; he's confirmed genuinely team/organization-dependent SLOs don't apply to a solo learner. Everything else — even material outside this app's direct feature set — is meant to be genuinely understood, not skipped for convenience.
 
 **The course's Phase 1–7B numbering is a separate, complete curriculum arc from this project's own Step 1–9 roadmap — they are not synchronized.** A shared number (e.g. "Phase 4" vs. "Step 4") is coincidental, not structural. All phases must genuinely be covered eventually, regardless of which project step is active when the opportunity arises.
 

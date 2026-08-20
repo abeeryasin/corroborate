@@ -1,9 +1,9 @@
 ---
 name: launch-app
-description: Launch and drive the Evidence Intelligence Platform's Streamlit app (frontend/streamlit_app.py) to test it for real — upload a paper, ask a question, verify a real cited answer comes back. Use whenever asked to run, test, or screenshot this project's app.
+description: Launch and drive Corroborate's Streamlit app (frontend/streamlit_app.py) to test it for real — upload a paper, ask a question, verify a real cited answer comes back. Use whenever asked to run, test, or screenshot this project's app.
 ---
 
-# Launching the Evidence Intelligence Platform
+# Launching Corroborate
 
 ## Start the server
 

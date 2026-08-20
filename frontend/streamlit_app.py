@@ -28,7 +28,7 @@ from app.rag.generation import generate_answer
 
 init_db()
 
-st.title("Evidence Intelligence Platform")
+st.title("Corroborate")
 
 existing_workspaces = get_all_workspaces()
 NEW_WORKSPACE_LABEL = "Add new workspace"
