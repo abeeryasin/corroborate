@@ -23,7 +23,13 @@ streamlit run frontend/streamlit_app.py
 
 ## Preferences
 
-- Explain a new concept before writing code that uses it — this is a learning project for someone new to Python/SQL.
+- **Learning loop for every new step** (this project IS the learning environment — there are no separate lectures to learn from first). Reverted 2026-08-19 to this version after trying a stricter "implement it yourself" loop that assumed more baseline fluency than week-1-of-Python actually has — revisit the stricter version later once fundamentals are solid, not before:
+  1. Explain the concepts needed for this step before writing any code — assume basic Python only, explain what tool/pattern we're using, why, and how it fits the architecture.
+  2. Write the code.
+  3. Walk through it line by line.
+  4. Point out common beginner mistakes tied to this specific code.
+  5. Give a small, contained exercise — not "build the feature," something scoped enough to attempt from what was just explained.
+  6. Optionally, lightly quiz on the concept afterward — one question at a time, don't give the answer unless stuck after trying. Keep this low-pressure, not a mandatory gate.
 - Raw SQL via `sqlite3`, no ORM — the SQL should stay visible, not hidden behind an abstraction.
 - Dependencies go into `requirements.txt` only when a step actually needs them, not front-loaded.
 - Secrets live in `.env` (gitignored); `.env.example` holds placeholder keys only.
@@ -42,8 +48,8 @@ Roadmap — build one step at a time:
 5. Streamlit v1
 6. RAG Q&A (the centerpiece)
 7. Polish ← current
-8. Deploy
-9. Light eval
+8. Deploy — includes GitHub setup first (confirmed 2026-08-20: no GitHub account exists yet, and this repo has no remote configured — `git remote -v` is empty. Needed before any deploy host can be used, since e.g. Streamlit Community Cloud deploys from a GitHub repo, not local files. Also one of the project's original 5 success criteria ("polished GitHub repo"), not just deploy plumbing.)
+9. Light eval — done (2026-08-19, out of order ahead of Deploy) — see `docs/rag-evaluation.md`
 
-**v2, not now:** study comparison, evidence tables, gap identification, decision tracking, agents, a standalone knowledge-graph exercise.
+**v2, not now:** study comparison, evidence tables, gap identification, decision tracking, agents, a standalone knowledge-graph exercise. Also: structure-aware ingestion (PDF → clean Markdown before chunking, e.g. via an LLM, instead of raw `pypdf` text) + section/paragraph-aware chunking instead of fixed-1000-character splitting — justified by two real failures found during the Step 7 eval (`docs/rag-evaluation.md`): a mid-sentence chunk split, and page headers/footers bleeding into body text mid-paragraph. Also: a real recycle bin (soft delete — `deleted_at` column, restore via re-running the ingestion pipeline since Chroma embeddings would need re-creating) — deferred 2026-08-20 in favor of the cheaper confirm-before-delete step already shipped, which covers the main risk (accidental irreversible deletion) without a schema migration.
 **v3 idea:** automatic literature search via PubMed/Semantic Scholar APIs (see project memory for constraints).

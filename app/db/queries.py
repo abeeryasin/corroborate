@@ -32,6 +32,14 @@ def get_papers_by_workspace(workspace):
     return papers
 
 
+def get_all_workspaces():
+    connection = sqlite3.connect(DB_PATH)
+    cursor = connection.execute("SELECT DISTINCT workspace FROM papers ORDER BY workspace")
+    workspaces = [row[0] for row in cursor.fetchall()]
+    connection.close()
+    return workspaces
+
+
 def get_paper_by_id(paper_id):
     connection = sqlite3.connect(DB_PATH)
     connection.row_factory = sqlite3.Row
