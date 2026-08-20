@@ -29,6 +29,7 @@ from app.rag.generation import generate_answer
 init_db()
 
 st.title("Corroborate")
+st.caption("Upload research papers, ask questions, get answers cited back to the source.")
 
 existing_workspaces = get_all_workspaces()
 NEW_WORKSPACE_LABEL = "Add new workspace"
