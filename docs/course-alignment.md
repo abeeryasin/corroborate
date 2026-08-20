@@ -69,7 +69,7 @@ Tracks how the Corroborate build satisfies the AI-native engineer curriculum wri
 | 4.4 | External Integration | READ-ONLY access | Permission proof | Not started |
 | 4.6 | External Integration | Schema-first habit | `schema-first-checklist.md` | Not started — corrected 2026-07-28, not yet genuinely practiced |
 | 4.9 | External Integration | Data analysis + viz | Analysis script, 2+ charts | Not started |
-| 4.17 | External Integration | Why deployment | `deployment-rationale.md` | Not started — Step 8 |
+| 4.17 | External Integration | Why deployment | `deployment-rationale.md` | **Satisfied (2026-08-21)** — `docs/deployment-rationale.md`, written by the user after a 3-question recall quiz on the real deploy just completed, assistant fact-checked (caught: the analogy contradicting the concept explanation on 24/7 availability, the "12-hour deletion timer" framing vs. the real sleep/wake mechanism, and an inaccurate claim that refreshing the page wipes data) |
 | 4.18 | External Integration | Cron jobs | `cron-candidates.md` | Deferred — optional, not required for MVP |
 | 4.19 | External Integration | Frontend vs. backend | `system-architecture.md` | **Satisfied** — `docs/system-architecture.md`, written by the user after a 5-question recall quiz, assistant fact-checked (caught one inaccuracy: described a "search tab" that doesn't exist in the actual UI, which is one continuous page, not `st.tabs`) |
 | 4.20 | External Integration | What an API is | `api-test.md` | **Satisfied** — `docs/api-test.md`, written by the user after a 4-question recall quiz, assistant fact-checked (caught one inaccuracy: described "code" as being shared between machines, corrected to "a message/data," not a program) |
