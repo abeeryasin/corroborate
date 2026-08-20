@@ -138,11 +138,12 @@ if query and query != st.session_state.get("last_answered_question"):
     )
     st.session_state["last_answered_question"] = query
 
-if st.session_state.get("qa_history"):
-    st.header("Previously asked questions")
-    for qa in reversed(st.session_state["qa_history"]):
-        st.write(f"**Q: {qa['question']}**")
-        st.write(qa["answer"])
-        if qa["sources"]:
-            st.caption("Sources: " + "; ".join(qa["sources"]))
-        st.divider()
+if len(st.session_state.get("qa_history", [])) > 1:
+    st.subheader("Previously asked questions")
+    prior_qa = list(reversed(st.session_state["qa_history"][:-1]))
+    qa_by_question = {qa["question"]: qa for qa in prior_qa}
+    selected_question = st.selectbox("Select a previous question", qa_by_question.keys())
+    selected_qa = qa_by_question[selected_question]
+    st.write(selected_qa["answer"])
+    if selected_qa["sources"]:
+        st.caption("Sources: " + "; ".join(selected_qa["sources"]))
