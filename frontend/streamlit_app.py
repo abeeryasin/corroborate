@@ -139,14 +139,14 @@ if query and query != st.session_state.get("last_answered_question"):
     st.session_state["last_answered_question"] = query
 
 if len(st.session_state.get("qa_history", [])) > 1:
-    st.subheader("Previously asked questions")
-    prior_qa = list(reversed(st.session_state["qa_history"][:-1]))
-    qa_by_question = {qa["question"]: qa for qa in prior_qa}
-    selected_question = st.selectbox("Select a previous question", qa_by_question.keys())
-    selected_qa = qa_by_question[selected_question]
-    st.write(selected_qa["answer"])
-    if selected_qa["sources"]:
-        st.caption("Sources: " + "; ".join(selected_qa["sources"]))
+    with st.expander("Previously asked questions", expanded=False):
+        prior_qa = list(reversed(st.session_state["qa_history"][:-1]))
+        qa_by_question = {qa["question"]: qa for qa in prior_qa}
+        selected_question = st.selectbox("Select a previous question", qa_by_question.keys())
+        selected_qa = qa_by_question[selected_question]
+        st.write(selected_qa["answer"])
+        if selected_qa["sources"]:
+            st.caption("Sources: " + "; ".join(selected_qa["sources"]))
 
 if workspace:
     stats = get_question_stats(workspace)
