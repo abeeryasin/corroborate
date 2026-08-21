@@ -19,7 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import streamlit as st
 
 from app.db.schema import init_db
-from app.db.queries import insert_paper, get_papers_by_workspace, get_all_workspaces, delete_paper
+from app.db.queries import insert_paper, get_papers_by_workspace, get_all_workspaces, delete_paper, get_question_stats
 from app.ingestion.pdf_extractor import extract_text
 from app.ingestion.metadata_extractor import extract_metadata
 from app.rag.chunking import chunk_text
@@ -40,6 +40,15 @@ if selected_workspace == NEW_WORKSPACE_LABEL:
     workspace = st.text_input("New workspace name")
 else:
     workspace = selected_workspace
+
+if workspace:
+    stats = get_question_stats(workspace)
+    if stats["total_questions"]:
+        with st.expander("System health", expanded=False):
+            st.metric("Questions asked", stats["total_questions"])
+            st.metric("Average response time", f"{stats['avg_response_time']:.1f}s")
+            st.metric("Errors", stats["error_count"])
+            st.metric("\"I don't know\" answers", stats["dont_know_count"])
 
 with st.expander("Upload a paper", expanded=False):
     uploaded_file = st.file_uploader("PDF file", type="pdf")

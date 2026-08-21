@@ -19,10 +19,23 @@ CREATE TABLE IF NOT EXISTS papers (
 );
 """
 
+CREATE_QUESTION_LOG_TABLE = """
+CREATE TABLE IF NOT EXISTS question_log (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    workspace TEXT NOT NULL,
+    question TEXT NOT NULL,
+    response_time_seconds REAL,
+    was_error INTEGER NOT NULL,
+    was_dont_know INTEGER NOT NULL,
+    asked_at TEXT NOT NULL
+);
+"""
+
 
 def init_db():
     connection = sqlite3.connect(DB_PATH)
     connection.execute(CREATE_PAPERS_TABLE)
+    connection.execute(CREATE_QUESTION_LOG_TABLE)
     connection.commit()
     connection.close()
 
