@@ -41,15 +41,6 @@ if selected_workspace == NEW_WORKSPACE_LABEL:
 else:
     workspace = selected_workspace
 
-if workspace:
-    stats = get_question_stats(workspace)
-    if stats["total_questions"]:
-        with st.expander("System health", expanded=False):
-            st.metric("Questions asked", stats["total_questions"])
-            st.metric("Average response time", f"{stats['avg_response_time']:.1f}s")
-            st.metric("Errors", stats["error_count"])
-            st.metric("\"I don't know\" answers", stats["dont_know_count"])
-
 with st.expander("Upload a paper", expanded=False):
     uploaded_file = st.file_uploader("PDF file", type="pdf")
 
@@ -156,3 +147,12 @@ if len(st.session_state.get("qa_history", [])) > 1:
     st.write(selected_qa["answer"])
     if selected_qa["sources"]:
         st.caption("Sources: " + "; ".join(selected_qa["sources"]))
+
+if workspace:
+    stats = get_question_stats(workspace)
+    if stats["total_questions"]:
+        with st.expander("System health", expanded=False):
+            st.metric("Questions asked", stats["total_questions"])
+            st.metric("Average response time", f"{stats['avg_response_time']:.1f}s")
+            st.metric("Errors", stats["error_count"])
+            st.metric("\"I don't know\" answers", stats["dont_know_count"])
