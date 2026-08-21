@@ -115,7 +115,7 @@ Tracks how the Corroborate build satisfies the AI-native engineer curriculum wri
 | 4.16 | External Integration | Multi-hop KG queries | Query demo | Deferred — same as above |
 | 3.11 | Memory Engineering | Team skill library | — | **Skip** — team-dependent |
 | 5.3 | Autonomous Operations | Cost/comm/approval guardrails | Working code + test logs | Not started — mapped to Step 6 (Claude API cost cap) |
-| 5.5 | Autonomous Operations | Safety monitoring | Dashboard, 3+ metrics, 1wk data | Not started — mapped to Step 7/8 |
+| 5.5 | Autonomous Operations | Safety monitoring | Dashboard, 3+ metrics, 1wk data | **Satisfied (2026-08-21)** — real "System health" dashboard in the app (4 metrics: questions asked, avg response time, errors, "I don't know" rate), backed by a real `question_log` table logging every question. `docs/safety-monitoring.md` written by the user after a 2-question recall quiz, fact-checked (content was fully accurate — only grammar/formatting needed cleanup). Adapted honestly for a solo low-traffic app: covers technical/system health only, not answer-quality checking (that's LLM-as-judge, explicitly deferred to v2), and the doc itself names that the SLO-demonstration reason carries more weight right now than genuine operational urgency at this scale |
 | 5.6 | Autonomous Operations | Escalation protocol | `escalation-protocol.md` | Not started — mapped to Step 8, adapted solo |
 | 5.7 | Autonomous Operations | Agent specialization | `agent-specialization.md` | Not started |
 | 5.8 | Autonomous Operations | Agent handoff protocol | `handoff-demo.md` | Not started — adapt via subagent-to-subagent handoff when a real occasion fits |
