@@ -4,6 +4,8 @@
 
 Corroborate — upload research papers, ask questions, get cited answers drawn from your own uploaded PDFs (retrieval-augmented generation). Portfolio + learning project — MVP scope only. See `docs/course-alignment.md` for how this maps to an external learning curriculum.
 
+**Status as of 2026-08-23: v1 complete and deployed.** Live on Streamlit Community Cloud (production tracks `main`; a separate staging app tracks the `staging` branch — exact URLs live in the user's Streamlit Cloud dashboard, not recorded here to avoid a stale/guessed link). GitHub: `github.com/abeeryasin/corroborate`, public.
+
 Stack: Python 3.12, SQLite for metadata (raw SQL, no ORM), Chroma for vectors, sentence-transformers for local embeddings, Claude API (`claude-opus-4-8` default) for generation, Streamlit frontend — Streamlit calls everything directly, in-process; no separate backend service exists (a FastAPI layer was scaffolded in Step 1, never built, and removed 2026-08-20 since nothing needs that boundary yet — see docs/system-architecture.md).
 
 ## Context Window
@@ -40,17 +42,21 @@ streamlit run frontend/streamlit_app.py
 
 ## Current Status
 
-Roadmap — build one step at a time:
+**Roadmap complete — all 9 steps done as of 2026-08-23. No step is "current" anymore.** For context on what each step involved:
 
-1. Scaffold
-2. Metadata DB (SQLite)
-3. PDF ingestion
-4. Chunking + embeddings
-5. Streamlit v1
-6. RAG Q&A (the centerpiece)
-7. Polish ← current
-8. Deploy — includes GitHub setup first (confirmed 2026-08-20: no GitHub account exists yet, and this repo has no remote configured — `git remote -v` is empty. Needed before any deploy host can be used, since e.g. Streamlit Community Cloud deploys from a GitHub repo, not local files. Also one of the project's original 5 success criteria ("polished GitHub repo"), not just deploy plumbing.)
-9. Light eval — done (2026-08-19, out of order ahead of Deploy) — see `docs/rag-evaluation.md`
+1. Scaffold — done
+2. Metadata DB (SQLite) — done
+3. PDF ingestion — done
+4. Chunking + embeddings — done
+5. Streamlit v1 — done
+6. RAG Q&A (the centerpiece) — done
+7. Polish — done (workspace picker, delete-with-confirm, question history, `app/api/` cleanup, README overhaul)
+8. Deploy — done 2026-08-23 (GitHub + Streamlit Community Cloud + staging workflow + all 5 deploy-adjacent SLO docs: `deployment-rationale.md`, `safety-monitoring.md`, `escalation-protocol.md`, `sla-definition.md`, `staging-vs-production.md`, `observability.md`)
+9. Light eval — done 2026-08-19 (out of order, ahead of Deploy) — see `docs/rag-evaluation.md`
+
+**What's actually next, per standing user instructions already recorded in persistent memory (not repeated in full here — read `project_evidence_intelligence_platform.md` in the assistant's memory system for the reasoning):**
+1. Once picked back up, do a full revision/quiz pass over every concept and decision in this project, framed around interview-readiness — this was explicitly requested and not yet done.
+2. Then a proper v2 planning pass (same MVP-planning-pass process used to start v1) using the list below — don't just start building from it.
 
 **v2, not now:** study comparison, evidence tables, gap identification, decision tracking, agents, a standalone knowledge-graph exercise. Also: structure-aware ingestion (PDF → clean Markdown before chunking, e.g. via an LLM, instead of raw `pypdf` text) + section/paragraph-aware chunking instead of fixed-1000-character splitting — justified by two real failures found during the Step 7 eval (`docs/rag-evaluation.md`): a mid-sentence chunk split, and page headers/footers bleeding into body text mid-paragraph. Also: a real recycle bin (soft delete — `deleted_at` column, restore via re-running the ingestion pipeline since Chroma embeddings would need re-creating) — deferred 2026-08-20 in favor of the cheaper confirm-before-delete step already shipped, which covers the main risk (accidental irreversible deletion) without a schema migration. Also: real uptime/SLA tracking (a `session_log` table was actually built and then deliberately reverted 2026-08-22 — the data could only ever prove uptime, never downtime, and with a single user who *is* the operator, there's no one to make an availability promise to that they don't already know firsthand) — SLO 5.13 written as a conceptual doc for v1 instead, same reasoning as escalation protocol. Also: a real escalation protocol (error-rate/cost/"I don't know"-spike thresholds that actually pause the app and alert a human operator, not just the existing per-question "I don't know" stop) — SLO 5.6 written as a conceptual doc for v1 instead, deferred to v3 if it turns out to be needed. Also: LLM-as-judge answer-quality checking (a second AI call evaluates whether the first one's answer is well-grounded) — for SLO 5.5/5.19, scoped down for v1 to technical/system health monitoring only (errors, response time, "I don't know" rate), since answer *correctness* can't be checked automatically without this. Also: real persistent storage for the deployed app — migrate off local SQLite/Chroma files to an external hosted DB (e.g. Postgres + Chroma Cloud), or move to a paid host with a mounted persistent volume (Railway Hobby, ~$5/mo, smallest real code change) — deferred 2026-08-20 in favor of accepting ephemeral storage on Streamlit Community Cloud for the deploy. Trigger to revisit: if this stops being a demo/portfolio app and becomes something the user (or their brother, reviewing informally) actually wants to keep using with data persisting across days/weeks.
 **v3 idea:** automatic literature search via PubMed/Semantic Scholar APIs (see project memory for constraints).

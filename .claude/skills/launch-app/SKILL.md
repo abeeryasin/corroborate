@@ -27,11 +27,16 @@ Streamlit only runs the script when a real client connects — nothing happens a
 
 ## Drive it (Playwright / chromium-cli)
 
-Real things learned testing this app, not generic advice:
+Real things learned testing this app, not generic advice. **Page layout changed 2026-08-20 onward** — several sections are now inside collapsed `st.expander`s by default, which older notes on this app don't account for:
 
+- **Workspace picker is a dropdown, not a text field.** `st.selectbox("Workspace", ...)` — pick an existing workspace, or select the literal option `"Add new workspace"` to reveal a text input for a brand-new name. Don't `.fill()` a workspace text box directly; it's a select first.
+- **"Upload a paper" is inside a collapsed expander (`expanded=False`).** Click it open (`page.getByText("Upload a paper").click()`) before trying to find the file input or Title field — they exist in the DOM but aren't interactable/visible until the expander is opened.
 - The page has **two** elements matching the text "Question" (the `<h2>` heading and the actual input). Use `page.getByRole("textbox", { name: "Question" })` — a bare `getByLabel("Question")` throws a strict-mode ambiguity error.
 - `st.text_input` only triggers a Streamlit rerun on blur or Enter, **not on every keystroke**. After `.fill()`, send a `Tab` keypress (or click elsewhere) before checking for results — otherwise you'll see stale/empty output and wrongly conclude the feature is broken.
-- Uploading a file: `page.locator('input[type="file"]').setInputFiles(path)`, fill in the Title field, then click the Upload button (`page.getByRole("button", { name: "Upload" })`) — the form only actually submits on that click.
+- Uploading a file (after opening the expander above): `page.locator('input[type="file"]').setInputFiles(path)`, fill in the Title field, then click the Upload button (`page.getByRole("button", { name: "Upload" })`) — the form only actually submits on that click.
+- **Deleting a paper is two clicks, not one.** Click "Delete" once to arm it (shows a warning + "Yes, delete it" / "Cancel"), then click "Yes, delete it" to actually delete. A single click never deletes anything — that's intentional (confirm-before-delete), not a bug.
+- **"Previously asked questions" is also a collapsed expander**, and only appears once at least 2 questions have been asked in the session (the most recent one is shown above it, not duplicated inside).
+- **"System health" is a third collapsed expander**, appearing only after at least 1 question has been asked in that workspace — shows question count, avg response time, errors, "I don't know" count, and total cost in USD.
 - A real question through `generate_answer()` takes several real seconds (it's a live Claude API call, not local search). Wait for the "Reading your papers..." spinner text to disappear rather than a short fixed timeout.
 
 ## Stop it
