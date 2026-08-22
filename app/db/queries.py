@@ -73,14 +73,14 @@ def update_paper(paper_id, title, authors, year, journal, doi, abstract):
     connection.close()
 
 
-def log_question(workspace, question, response_time_seconds, was_error, was_dont_know, asked_at):
+def log_question(workspace, question, response_time_seconds, was_error, was_dont_know, asked_at, cost_usd=None):
     connection = sqlite3.connect(DB_PATH)
     connection.execute(
         """
-        INSERT INTO question_log (workspace, question, response_time_seconds, was_error, was_dont_know, asked_at)
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO question_log (workspace, question, response_time_seconds, was_error, was_dont_know, asked_at, cost_usd)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         """,
-        (workspace, question, response_time_seconds, int(was_error), int(was_dont_know), asked_at),
+        (workspace, question, response_time_seconds, int(was_error), int(was_dont_know), asked_at, cost_usd),
     )
     connection.commit()
     connection.close()
@@ -95,7 +95,8 @@ def get_question_stats(workspace):
             COUNT(*) AS total_questions,
             AVG(response_time_seconds) AS avg_response_time,
             SUM(was_error) AS error_count,
-            SUM(was_dont_know) AS dont_know_count
+            SUM(was_dont_know) AS dont_know_count,
+            SUM(cost_usd) AS total_cost
         FROM question_log
         WHERE workspace = ?
         """,

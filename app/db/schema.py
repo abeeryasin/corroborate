@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS question_log (
     response_time_seconds REAL,
     was_error INTEGER NOT NULL,
     was_dont_know INTEGER NOT NULL,
-    asked_at TEXT NOT NULL
+    asked_at TEXT NOT NULL,
+    cost_usd REAL
 );
 """
 
@@ -36,6 +37,14 @@ def init_db():
     connection = sqlite3.connect(DB_PATH)
     connection.execute(CREATE_PAPERS_TABLE)
     connection.execute(CREATE_QUESTION_LOG_TABLE)
+
+    # Migration: question_log already existed (with real data) before cost_usd
+    # was added. CREATE TABLE IF NOT EXISTS above only fires for brand-new
+    # databases, so existing ones need the column added separately.
+    existing_columns = [row[1] for row in connection.execute("PRAGMA table_info(question_log)")]
+    if "cost_usd" not in existing_columns:
+        connection.execute("ALTER TABLE question_log ADD COLUMN cost_usd REAL")
+
     connection.commit()
     connection.close()
 

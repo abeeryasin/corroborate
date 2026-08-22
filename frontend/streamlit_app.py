@@ -156,3 +156,4 @@ if workspace:
             st.metric("Average response time", f"{stats['avg_response_time']:.1f}s")
             st.metric("Errors", stats["error_count"])
             st.metric("\"I don't know\" answers", stats["dont_know_count"])
+            st.metric("Total cost", f"${(stats['total_cost'] or 0):.4f}")

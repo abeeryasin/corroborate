@@ -15,6 +15,10 @@ load_dotenv()
 
 client = anthropic.Anthropic()
 
+# claude-opus-4-8 pricing, per million tokens
+INPUT_COST_PER_MILLION = 5.00
+OUTPUT_COST_PER_MILLION = 25.00
+
 SYSTEM_PROMPT = """Answer the question using only the excerpts provided below. \
 Do not use any outside knowledge, even if you know the answer some other way. \
 Each excerpt is labeled with the paper it came from — when you use an excerpt, \
@@ -28,6 +32,7 @@ def generate_answer(question, workspace, n_results=5):
     was_error = False
     answer = None
     sources = []
+    cost_usd = None
 
     try:
         results = search(question, workspace, n_results=n_results)
@@ -57,6 +62,11 @@ def generate_answer(question, workspace, n_results=5):
 
             answer = next(block.text for block in response.content if block.type == "text")
             sources = list(citations.values())
+
+            cost_usd = (
+                response.usage.input_tokens / 1_000_000 * INPUT_COST_PER_MILLION
+                + response.usage.output_tokens / 1_000_000 * OUTPUT_COST_PER_MILLION
+            )
     except Exception:
         was_error = True
         answer = "Something went wrong answering this question. Please try again."
@@ -70,6 +80,7 @@ def generate_answer(question, workspace, n_results=5):
             was_error=was_error,
             was_dont_know=was_dont_know,
             asked_at=datetime.datetime.now().isoformat(),
+            cost_usd=cost_usd,
         )
 
     return answer, sources
