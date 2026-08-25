@@ -2,7 +2,7 @@
 
 Rough hours per roadmap step, at a beginner's pace, assuming ~3 hrs/day.
 
-**Important scope note:** this is an estimate for the *project build steps* (1–9 below), not a separate estimate for the course's own weekly phases. Since we merged the two tracks — learning the curriculum concepts *through* the project instead of as a separate track (see `docs/course-alignment.md`) — there's no clean "Phase 1 = X hours" figure anymore. The course's original pasted material listed its own rough week-by-week hour budgets (e.g. "Week 1, ~8–10 hrs"), but those numbers assumed doing the course's own standalone exercises, which isn't what we're doing. Use the table below as the real estimate.
+**Important scope note:** this is an estimate for the *project build steps* (1–9 below), not a separate estimate for the course's own weekly phases. Since we merged the two tracks — learning the curriculum concepts *through* the project instead of as a separate track (see the course-progress tracking document) — there's no clean "Phase 1 = X hours" figure anymore. The course's original pasted material listed its own rough week-by-week hour budgets (e.g. "Week 1, ~8–10 hrs"), but those numbers assumed doing the course's own standalone exercises, which isn't what we're doing. Use the table below as the real estimate.
 
 | Step | What it is | Est. hours | Why |
 |---|---|---|---|
@@ -23,4 +23,4 @@ At 3 hrs/day, that's roughly **4–7 weeks of calendar time** — not because th
 
 - v2 features (study comparison, evidence tables, gap identification, decision tracking, agents, knowledge-graph exercise) — no estimate yet, will be scoped when we get there.
 - v3 idea: automatic literature search via PubMed/Semantic Scholar APIs — same, unscoped until relevant.
-- Course SLOs reclassified as "solo-adaptable" in `docs/course-alignment.md` (guardrails, observability, staging, etc.) — folded into Steps 6–9 above where they fit; not separately budgeted.
+- Course SLOs reclassified as "solo-adaptable" in the course-progress tracking document (guardrails, observability, staging, etc.) — folded into Steps 6–9 above where they fit; not separately budgeted.

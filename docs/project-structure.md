@@ -44,7 +44,6 @@ Research/
 │
 └── docs/
     ├── decisions.md            The "why" log — every real decision, dated
-    ├── course-alignment.md     Course-SLO mapping and progress
     ├── rag-evaluation.md       10 real test queries, verified successes and root-caused failures
     ├── system-architecture.md  The frontend/backend boundary — what exists, what doesn't, why
     ├── db-vocabulary.md        Database terms in plain language, tied to the real schema

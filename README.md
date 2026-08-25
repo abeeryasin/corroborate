@@ -54,5 +54,4 @@ streamlit run frontend/streamlit_app.py
 - [`docs/decisions.md`](docs/decisions.md) — dated log of real decisions and the reasoning behind them
 - [`docs/rag-evaluation.md`](docs/rag-evaluation.md) — 10 real test queries, verified successes and root-caused failures
 - [`docs/system-architecture.md`](docs/system-architecture.md) — current frontend/backend boundary (or lack of one) and why
-- [`docs/course-alignment.md`](docs/course-alignment.md) — how this build maps to an external learning curriculum
 - [`docs/project-structure.md`](docs/project-structure.md) — what each folder contains and why (note: written early in the project and due for a refresh — some details, like `requirements.txt` being empty, are now stale)

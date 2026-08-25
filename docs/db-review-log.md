@@ -16,7 +16,7 @@ While writing `docs/data-modeling.md` (SLO 4.8), an early draft explained *why* 
 
 ## 2026-07-28 — The course tracker itself was wrong about SLO 4.6
 
-`docs/course-alignment.md` had claimed more progress on SLO 4.6 (schema-first habit) than had actually happened. Caught and corrected — it now honestly says "not yet genuinely practiced" instead of overstating it. This one's a bit different: it's the tracking document being checked for honesty, not the database code itself.
+The course-progress tracking document had claimed more progress on SLO 4.6 (schema-first habit) than had actually happened. Caught and corrected — it now honestly says "not yet genuinely practiced" instead of overstating it. This one's a bit different: it's the tracking document being checked for honesty, not the database code itself.
 
 ## 2026-07-31 — Two Step 5 decisions, actually questioned this time
 
