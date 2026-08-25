@@ -33,14 +33,32 @@ def delete_paper_chunks(paper_id):
     collection.delete(where={"paper_id": paper_id})
 
 
-def search(query, workspace, n_results=5):
+def search(query, workspace, n_results=5, max_per_paper=2):
     query_embedding = model.encode(query).tolist()
-    results = collection.query(
+    pool_size = n_results * 4
+
+    raw = collection.query(
         query_embeddings=[query_embedding],
-        n_results=n_results,
+        n_results=pool_size,
         where={"workspace": workspace},
     )
-    return results
+
+    documents, metadatas, ids = raw["documents"][0], raw["metadatas"][0], raw["ids"][0]
+
+    selected_docs, selected_metas, selected_ids = [], [], []
+    per_paper_count = {}
+    for doc, meta, id_ in zip(documents, metadatas, ids):
+        if len(selected_docs) >= n_results:
+            break
+        paper_id = meta["paper_id"]
+        if per_paper_count.get(paper_id, 0) >= max_per_paper:
+            continue
+        selected_docs.append(doc)
+        selected_metas.append(meta)
+        selected_ids.append(id_)
+        per_paper_count[paper_id] = per_paper_count.get(paper_id, 0) + 1
+
+    return {"documents": [selected_docs], "metadatas": [selected_metas], "ids": [selected_ids]}
 
 
 if __name__ == "__main__":

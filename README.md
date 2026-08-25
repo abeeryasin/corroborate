@@ -44,7 +44,7 @@ streamlit run frontend/streamlit_app.py
 
 ## Known limitations
 
-- No automated test suite yet (`tests/` is a placeholder) — verified so far through structured manual end-to-end testing (`docs/decisions.md`) and the RAG evaluation above, not unit tests.
+- A real automated test suite exists (`tests/`, run via `pytest`) covering the chunking algorithm, the retrieval diversity fix, the database layer, and core Streamlit UI wiring — but it's the meaningful core, not full coverage. What it doesn't and can't check: whether the LLM's cleaned text output is actually *good* (a judgment call, not a pass/fail condition — that's what the RAG evaluation above is for).
 - Storage is local-only (SQLite file + Chroma directory on disk) until deployment lands; see the deploy plan in `docs/decisions.md` for the persistent-storage tradeoff being made there.
 - Fixed-size, non-overlapping chunking (documented, with real failure examples, in `docs/rag-evaluation.md`) — structure-aware chunking is a scoped v2 improvement, not an unknown gap.
 

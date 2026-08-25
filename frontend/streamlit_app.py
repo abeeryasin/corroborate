@@ -22,6 +22,7 @@ from app.db.schema import init_db
 from app.db.queries import insert_paper, get_papers_by_workspace, get_all_workspaces, delete_paper, get_question_stats
 from app.ingestion.pdf_extractor import extract_text
 from app.ingestion.metadata_extractor import extract_metadata
+from app.ingestion.text_cleaner import clean_to_markdown
 from app.rag.chunking import chunk_text
 from app.rag.vector_store import add_chunks, delete_paper_chunks
 from app.rag.generation import generate_answer
@@ -81,7 +82,9 @@ with st.expander("Upload a paper", expanded=False):
             st.error("Workspace, title, and a PDF file are all required.")
         else:
             text = raw_text or extract_text(f"data/uploads/{uploaded_file.name}")
-            chunks = chunk_text(text)
+            with st.spinner("Cleaning up extracted text before chunking..."):
+                cleaned_text = clean_to_markdown(text)
+            chunks = chunk_text(cleaned_text)
 
             paper_id = insert_paper(
                 title=title,

@@ -17,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from app.db.queries import insert_paper
 from app.ingestion.pdf_extractor import extract_text
 from app.ingestion.metadata_extractor import extract_metadata
+from app.ingestion.text_cleaner import clean_to_markdown
 from app.rag.chunking import chunk_text
 from app.rag.vector_store import add_chunks
 
@@ -28,7 +29,8 @@ def ingest_folder(folder, workspace):
 
         text = extract_text(pdf_path)
         metadata = extract_metadata(text)
-        chunks = chunk_text(text)
+        cleaned_text = clean_to_markdown(text)
+        chunks = chunk_text(cleaned_text)
 
         paper_id = insert_paper(
             title=metadata["title"] or filename,
