@@ -36,6 +36,10 @@ All queries in `app/db/queries.py` pass values as a separate tuple to `.execute(
 
 **Known limitation, accepted for now:** `pypdf` only extracts text that's actually embedded as selectable text in the PDF. A scanned paper (a photograph of a page, not real typed text) would extract to empty or near-empty output — `pypdf` can't do OCR (recognizing text from an image). Out of scope for the MVP; would need a different tool (e.g. `pytesseract`) if this becomes a real problem with actual uploaded papers.
 
+## 2026-07-24 — Fixed-size chunking, no overlap (for now)
+
+`chunk_text()` splits paper text into equal-sized pieces with no overlap between them. A more refined technique gives neighboring chunks a bit of shared overlap, so a sentence that would otherwise get cut in half at a chunk boundary still appears in full somewhere. Deliberately skipped for now to keep Step 4 (already the densest step on the roadmap) from getting even more complex on the first pass. Revisit if retrieval quality later seems to miss things right at chunk boundaries.
+
 ## 2026-07-28 — Run project files with `-m`, not as a bare script path, once they import our own code
 
 `python app/rag/chunking.py` failed with `ModuleNotFoundError: No module named 'app'` the first time a file tried to import our own project code (`from app.ingestion.pdf_extractor import extract_text`). Running a file directly as a script makes Python search for imports starting from *that file's own folder*, not the project root — so it couldn't find `app/` at all. Fix: run it as a module instead, `python -m app.rag.chunking` (dot notation, no `.py`), which searches starting from the current working directory (the project root) instead. Files that only import third-party/stdlib packages (`schema.py`, `queries.py`, `pdf_extractor.py`) never hit this, since those are always found regardless of the search starting point — this only shows up once a file imports *our own* project structure.
@@ -109,10 +113,6 @@ Gathered a real 10-paper corpus for `abeer-test`, spanning guidelines (WHO 2025 
 Built `scripts/ingest_papers.py` earlier for exactly this kind of batch job — used twice now (6 papers, then 3 more), confirming it was worth building as reusable code rather than a one-off script.
 
 **This is the trigger condition flagged back on 2026-08-03: once real papers were uploaded, come back and write the eval.** The `rag-evaluation.md` artifact (10+ documented queries, 5 working + 3 failing) is now unblocked and ready to write for real, against a genuine multi-paper corpus instead of a single-paper stand-in. Also worth deliberately testing the "does a broad question get crowded out by 1-2 papers" risk flagged on 2026-08-03, now that real topical overlap exists (e.g., two separate NS1/IgM diagnostic-accuracy papers).
-
-## 2026-07-24 — Fixed-size chunking, no overlap (for now)
-
-`chunk_text()` splits paper text into equal-sized pieces with no overlap between them. A more refined technique gives neighboring chunks a bit of shared overlap, so a sentence that would otherwise get cut in half at a chunk boundary still appears in full somewhere. Deliberately skipped for now to keep Step 4 (already the densest step on the roadmap) from getting even more complex on the first pass. Revisit if retrieval quality later seems to miss things right at chunk boundaries — this file isn't committed yet, still mid-Step-4.
 
 ## 2026-08-19 — `docs/rag-evaluation.md` written; closes two loops deferred earlier with real evidence
 
